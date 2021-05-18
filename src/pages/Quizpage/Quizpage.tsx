@@ -2,18 +2,10 @@ import './quizpage.css';
 import { useLocation } from 'react-router'
 import QuestionBox from '../../components/QuestionBox';
 import { Header } from '../../components/Header'
-import { useReducer, useState } from 'react'
+import { useReducer, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { RequestApi } from './RequestApi'
-type Action =
-  | { type: "CORRECT" }
-  | { type: "WRONG" }
-  | { type: "NEXT" }
-
-type QuizState = {
-  score: number;
-  currentQueNo: number;
-};
+import { QuizState, Action, quizQuestions, ServerData } from './quiz.types'
 const initialState: QuizState = { score: 0, currentQueNo: 0 };
 function reducer(state: QuizState, action: Action) {
   switch (action.type) {
@@ -41,14 +33,33 @@ function reducer(state: QuizState, action: Action) {
 }
 export function Quizpage() {
   const query = new URLSearchParams(useLocation().search).get("page")
-  const templist = RequestApi(query);
-  const classname = `${query}quiz`;
   const [{ score, currentQueNo }, dispatch] = useReducer(reducer, initialState);
+  const [serverData, setServerData] = useState<ServerData | null>(null)
+  const [question, setQuestion] = useState<quizQuestions | null>(null)
+  useEffect(() => {
+    (async function () {
+      const tempData = await RequestApi(query);
+      if (tempData !== null) {
+        console.log('one');
+        setServerData(tempData);
+      }
+    })();
+  }, [query]);
+
+  useEffect(() => {
+    (async function () {
+      console.log('two');
+      if (serverData !== null) {
+        await setQuestion(serverData.questionlist[currentQueNo])
+      }
+    })();
+  }, [serverData, currentQueNo]);
+  console.log(question);
+  const classname = `${query}quiz`;
   const [optionClick, setClickState] = useState(false)
   const [name, setName] = useState('')
   const [nameSet, setNameState] = useState(false)
   const [errorstate, setErrorstate] = useState(false)
-  const question = templist?.[currentQueNo];
   function startChecker() {
     if (name !== '' && /^[a-zA-Z\s]*$/.test(name)) {
       setNameState(true)
@@ -58,7 +69,7 @@ export function Quizpage() {
       setErrorstate(true)
     }
   }
-  return (question !== undefined ?
+  return (question !== null ?
     <div className={classname}>
       <div className='namefield' style={{ display: nameSet ? 'none' : "block" }}>
         <div className="inputbox">
@@ -107,6 +118,6 @@ export function Quizpage() {
         </div>
       </div>
     </div>
-    :<div className={classname}><h1>Loading....</h1></div>
+    : <div className={classname}><h1>Loading....</h1></div>
   );
 }
