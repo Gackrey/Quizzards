@@ -5,7 +5,7 @@ import { Header } from '../../components/Header'
 import { useReducer, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { RequestApi } from './RequestApi'
-import { QuizState, Action, quizQuestions, ServerData } from './quiz.types'
+import { QuizState, Action, quizQuestions, ServerData, ServerError } from './quiz.types'
 const initialState: QuizState = { score: 0, currentQueNo: 0 };
 function reducer(state: QuizState, action: Action) {
   switch (action.type) {
@@ -35,26 +35,26 @@ export function Quizpage() {
   const query = new URLSearchParams(useLocation().search).get("page")
   const [{ score, currentQueNo }, dispatch] = useReducer(reducer, initialState);
   const [serverData, setServerData] = useState<ServerData | null>(null)
+  const [serverFailure, setServerFailure] = useState<ServerError | null>(null)
   const [question, setQuestion] = useState<quizQuestions | null>(null)
   useEffect(() => {
     (async function () {
       const tempData = await RequestApi(query);
-      if (tempData !== null) {
-        console.log('one');
+      if ("questionlist" in tempData) {
         setServerData(tempData);
       }
+      else
+        setServerFailure(tempData)
     })();
   }, [query]);
 
   useEffect(() => {
     (async function () {
-      console.log('two');
-      if (serverData !== null) {
+      if (serverData !== null && serverFailure === null) {
         await setQuestion(serverData.questionlist[currentQueNo])
       }
     })();
-  }, [serverData, currentQueNo]);
-  console.log(question);
+  }, [serverData, currentQueNo, serverFailure]);
   const classname = `${query}quiz`;
   const [optionClick, setClickState] = useState(false)
   const [name, setName] = useState('')
@@ -118,6 +118,8 @@ export function Quizpage() {
         </div>
       </div>
     </div>
-    : <div className={classname}><h1>Loading....</h1></div>
+    : serverFailure !== null ?
+      <div><h1 className="errorpage">{}</h1></div>
+      : <div className={classname}><h1>Loading....</h1></div>
   );
 }

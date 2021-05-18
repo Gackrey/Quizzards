@@ -1,6 +1,6 @@
 import { ServerData, ServerError } from './quiz.types'
 import axios, { AxiosError } from 'axios'
-export async function RequestApi(genre: string | null): Promise<ServerData | null> {
+export async function RequestApi(genre: string | null): Promise<ServerData | ServerError> {
     try {
         const response = await axios.get<ServerData>(
             `https://quizzerd-backend.herokuapp.com/${genre}`
@@ -11,8 +11,8 @@ export async function RequestApi(genre: string | null): Promise<ServerData | nul
         if (axios.isAxiosError(err)) {
             const serverError = err as AxiosError<ServerError>;
             if (serverError && serverError.response)
-                return null;
+                return serverError.response.data
         }
-        return null;
+        return {errorMessage : "404: Page Not found!!!!"};
     }
 }
