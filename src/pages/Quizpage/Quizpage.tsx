@@ -1,10 +1,10 @@
 import './quizpage.css';
-import { iplquestionlist, reactquestionlist, marvelquestionlist } from '../../data/Quizzes/index';
 import { useLocation } from 'react-router'
 import QuestionBox from '../../components/QuestionBox';
 import { Header } from '../../components/Header'
 import { useReducer, useState } from 'react'
 import { Link } from 'react-router-dom';
+import { RequestApi } from './RequestApi'
 type Action =
   | { type: "CORRECT" }
   | { type: "WRONG" }
@@ -41,21 +41,14 @@ function reducer(state: QuizState, action: Action) {
 }
 export function Quizpage() {
   const query = new URLSearchParams(useLocation().search).get("page")
-  let templist = iplquestionlist;
-  if (query === 'ipl')
-    templist = iplquestionlist
-  else if (query === 'marvel')
-    templist = marvelquestionlist
-  else
-    templist = reactquestionlist
+  const templist = RequestApi(query);
   const classname = `${query}quiz`;
   const [{ score, currentQueNo }, dispatch] = useReducer(reducer, initialState);
   const [optionClick, setClickState] = useState(false)
   const [name, setName] = useState('')
   const [nameSet, setNameState] = useState(false)
   const [errorstate, setErrorstate] = useState(false)
-  let question = templist[currentQueNo];
-
+  const question = templist?.[currentQueNo];
   function startChecker() {
     if (name !== '' && /^[a-zA-Z\s]*$/.test(name)) {
       setNameState(true)
@@ -65,7 +58,7 @@ export function Quizpage() {
       setErrorstate(true)
     }
   }
-  return (
+  return (question !== undefined ?
     <div className={classname}>
       <div className='namefield' style={{ display: nameSet ? 'none' : "block" }}>
         <div className="inputbox">
@@ -114,5 +107,6 @@ export function Quizpage() {
         </div>
       </div>
     </div>
+    :<div className={classname}><h1>Loading....</h1></div>
   );
 }
