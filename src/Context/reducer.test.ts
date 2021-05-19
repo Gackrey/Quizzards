@@ -28,4 +28,11 @@ describe("Testing reducer function", () => {
         const state = reducer(initialState, action)
         expect(state).toEqual({ score: 0, currentQueNo: 2 })
     })
+
+    test("Reset of score and question no.", () => {
+        const initialState: QuizState = { score: 7, currentQueNo: 2 };
+        const action: Action = { type: "RESET" }
+        const state = reducer(initialState, action)
+        expect(state).toEqual({ score: 0, currentQueNo: 0 })
+    })
 })
