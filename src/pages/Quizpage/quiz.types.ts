@@ -7,13 +7,14 @@ export type Action =
   | { type: "CORRECT" }
   | { type: "WRONG" }
   | { type: "NEXT" }
+  | { type: "RESET" }
 
 export type QuizState = {
   score: number;
   currentQueNo: number;
 };
 export type ServerData = {
-  questionlist:quizQuestions[]
+  questionlist: quizQuestions[]
 }
 export type ServerError = {
   errorMessage: string

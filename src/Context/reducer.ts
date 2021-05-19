@@ -19,5 +19,11 @@ export function reducer(state: QuizState, action: Action) {
                 ...state,
                 currentQueNo: state.currentQueNo + 1,
             };
+        case "RESET":
+            return {
+                ...state,
+                score: 0,
+                currentQueNo: 0,
+            };
     }
 }

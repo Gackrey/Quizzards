@@ -1,7 +1,7 @@
 import './quizpage.css';
 import { useLocation } from 'react-router'
-import { QuestionBox, Header } from '../../components/index'
-import {  useState, useEffect } from 'react'
+import { QuestionBox, Header, Timer } from '../../components/index'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { RequestApi } from './RequestApi'
 import { quizQuestions, ServerData, ServerError } from './quiz.types'
@@ -13,6 +13,12 @@ export function Quizpage() {
   const [serverData, setServerData] = useState<ServerData | null>(null)
   const [serverFailure, setServerFailure] = useState<ServerError | null>(null)
   const [question, setQuestion] = useState<quizQuestions | null>(null)
+  const [optionClick, setClickState] = useState(false)
+  const [name, setName] = useState('')
+  const [nameSet, setNameState] = useState(false)
+  const [errorstate, setErrorstate] = useState(false)
+  const [timerstart, setTimerStart] = useState(false)
+  const classname = `${query}quiz`;
   useEffect(() => {
     (async function () {
       const tempData = await RequestApi(query);
@@ -31,14 +37,11 @@ export function Quizpage() {
       }
     })();
   }, [serverData, currentQueNo, serverFailure]);
-  const classname = `${query}quiz`;
-  const [optionClick, setClickState] = useState(false)
-  const [name, setName] = useState('')
-  const [nameSet, setNameState] = useState(false)
-  const [errorstate, setErrorstate] = useState(false)
   function startChecker() {
     if (name !== '' && /^[a-zA-Z\s]*$/.test(name)) {
       setNameState(true)
+      setTimerStart(true)
+      dispatch({ type: "RESET" })
     }
     else {
       setName('')
@@ -66,6 +69,12 @@ export function Quizpage() {
       </div>
       <div style={{ display: nameSet ? 'block' : "none" }}>
         <Header name={name} score={score} />
+        <Timer
+          optionClick={optionClick}
+          currentQueNo={currentQueNo}
+          timerstart={timerstart}
+          dispatch={dispatch}
+        />
         <div className="quizbox">
           <h3>Question: {currentQueNo + 1}\10</h3>
           <QuestionBox
