@@ -1,4 +1,5 @@
 # Quizzards of Oz
+[![codecov](https://codecov.io/gh/Gackrey/Quizzards/branch/development/graph/badge.svg?token=5RLMI72878)](https://codecov.io/gh/Gackrey/Quizzards)
 
 This is a quiz web app which is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
