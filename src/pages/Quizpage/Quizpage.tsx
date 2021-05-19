@@ -1,39 +1,15 @@
 import './quizpage.css';
 import { useLocation } from 'react-router'
-import QuestionBox from '../../components/QuestionBox';
-import { Header } from '../../components/Header'
-import { useReducer, useState, useEffect } from 'react'
+import { QuestionBox, Header } from '../../components/index'
+import {  useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { RequestApi } from './RequestApi'
-import { QuizState, Action, quizQuestions, ServerData, ServerError } from './quiz.types'
-const initialState: QuizState = { score: 0, currentQueNo: 0 };
-function reducer(state: QuizState, action: Action) {
-  switch (action.type) {
-    case "CORRECT":
-      return {
-        ...state,
-        score: state.score + 1
-      };
-    case "WRONG":
-      if (state.score > 0) {
-        return {
-          ...state,
-          score: state.score - 1
-        };
-      }
-      return state;
-    case "NEXT":
-      return {
-        ...state,
-        currentQueNo: state.currentQueNo + 1,
-      };
-    default:
-      return state;
-  }
-}
+import { quizQuestions, ServerData, ServerError } from './quiz.types'
+import { useQuiz } from '../../Context/QuizContext'
+
 export function Quizpage() {
+  const { currentQueNo, score, dispatch } = useQuiz()
   const query = new URLSearchParams(useLocation().search).get("page")
-  const [{ score, currentQueNo }, dispatch] = useReducer(reducer, initialState);
   const [serverData, setServerData] = useState<ServerData | null>(null)
   const [serverFailure, setServerFailure] = useState<ServerError | null>(null)
   const [question, setQuestion] = useState<quizQuestions | null>(null)
@@ -119,7 +95,7 @@ export function Quizpage() {
       </div>
     </div>
     : serverFailure !== null ?
-      <div><h1 className="errorpage">{}</h1></div>
+      <div><h1 className="errorpage">{ }</h1></div>
       : <div className={classname}><h1>Loading....</h1></div>
   );
 }

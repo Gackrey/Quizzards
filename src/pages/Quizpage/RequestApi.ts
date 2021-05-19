@@ -13,6 +13,6 @@ export async function RequestApi(genre: string | null): Promise<ServerData | Ser
             if (serverError && serverError.response)
                 return serverError.response.data
         }
-        return {errorMessage : "404: Page Not found!!!!"};
+        return {errorMessage : "Landing page of API fetched"};
     }
 }

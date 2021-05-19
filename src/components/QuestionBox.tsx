@@ -8,7 +8,7 @@ type QuestionsBox = {
     optionClick: boolean;
     setClickState: Function;
 };
-const QuestionBox = ({ question, options, answer, dispatch, optionClick, setClickState }: QuestionsBox) => {
+export const QuestionBox = ({ question, options, answer, dispatch, optionClick, setClickState }: QuestionsBox) => {
     
     useEffect(() => {
         const Buttons = document.querySelectorAll('button')
@@ -59,5 +59,3 @@ const QuestionBox = ({ question, options, answer, dispatch, optionClick, setClic
         </div>
     );
 }
-
-export default QuestionBox;

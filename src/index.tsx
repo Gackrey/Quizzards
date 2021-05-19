@@ -4,11 +4,13 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { QuizProvider } from './Context/QuizContext'
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <QuizProvider>
+        <App />
+      </QuizProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
