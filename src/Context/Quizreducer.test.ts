@@ -1,4 +1,4 @@
-import { Quizreducer } from './reducer'
+import { Quizreducer } from './Quizreducer'
 import { QuizState, Action_QUIZ } from '../pages/Quizpage/quiz.types'
 describe("Testing reducer function", () => {
     test("Score incremented on correct answer", () => {

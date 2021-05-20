@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import { Quizreducer } from './reducer'
+import { Quizreducer } from './Quizreducer'
 const initialState= { score: 0, currentQueNo: 0 };
 
 export const QuizContext = createContext();
