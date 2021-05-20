@@ -3,7 +3,7 @@ export type quizQuestions = {
   options: string[];
   answer: number;
 }
-export type Action =
+export type Action_QUIZ =
   | { type: "CORRECT" }
   | { type: "WRONG" }
   | { type: "NEXT" }

@@ -1,5 +1,5 @@
-import { QuizState, Action } from '../pages/Quizpage/quiz.types'
-export function reducer(state: QuizState, action: Action) {
+import { QuizState, Action_QUIZ } from '../pages/Quizpage/quiz.types'
+export function Quizreducer(state: QuizState, action: Action_QUIZ) {
     switch (action.type) {
         case "CORRECT":
             return {
