@@ -6,9 +6,9 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("Testing quiz api", () => {
 
-  test("Site is live", async () => {
+  test("Site not working", async () => {
     const data = await RequestApi("");
-    expect(data).toEqual({ errorMessage: "Landing page of API fetched" });
+    expect(data).toEqual({ errorMessage: "Site not working" });
   });
 
   test("Quiz data request test", async () => {
