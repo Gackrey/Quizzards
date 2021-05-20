@@ -15,10 +15,13 @@ export function reducer(state: QuizState, action: Action) {
             }
             return state;
         case "NEXT":
-            return {
-                ...state,
-                currentQueNo: state.currentQueNo + 1,
-            };
+            if (state.currentQueNo < 9) {
+                return {
+                    ...state,
+                    currentQueNo: state.currentQueNo + 1,
+                };
+            }
+            return state;
         case "RESET":
             return {
                 ...state,

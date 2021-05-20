@@ -19,6 +19,7 @@ export function Quizpage() {
   const [errorstate, setErrorstate] = useState(false)
   const [timerstart, setTimerStart] = useState(false)
   const classname = `${query}quiz`;
+  const navigate = `/report?name=${name}&score=${score}&genre=${query}`
   useEffect(() => {
     (async function () {
       const tempData = await RequestApi(query);
@@ -74,6 +75,7 @@ export function Quizpage() {
           currentQueNo={currentQueNo}
           timerstart={timerstart}
           dispatch={dispatch}
+          navigateto={navigate}
         />
         <div className="quizbox">
           <h3>Question: {currentQueNo + 1}\10</h3>
@@ -95,7 +97,7 @@ export function Quizpage() {
                 }}
               >Next
             </button>
-                : <Link to={`/report?name=${name}&score=${score}&genre=${query}`}>
+                : <Link to={navigate}>
                   <button className="btn-next">Submit</button>
                 </Link>
               : ""

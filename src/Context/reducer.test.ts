@@ -15,6 +15,13 @@ describe("Testing reducer function", () => {
         expect(state).toEqual({ score: 2, currentQueNo: 2 })
     })
 
+    test("Score not decrement if already 0", () => {
+        const initialState: QuizState = { score: 0, currentQueNo: 2 };
+        const action: Action = { type: "WRONG" }
+        const state = reducer(initialState, action)
+        expect(state).toEqual({ score: 0, currentQueNo: 2 })
+    })
+
     test("Question number incremented", () => {
         const initialState: QuizState = { score: 3, currentQueNo: 2 };
         const action: Action = { type: "NEXT" }
@@ -22,12 +29,13 @@ describe("Testing reducer function", () => {
         expect(state).toEqual({ score: 3, currentQueNo: 3 })
     })
 
-    test("Score not decrement if already 0", () => {
-        const initialState: QuizState = { score: 0, currentQueNo: 2 };
-        const action: Action = { type: "WRONG" }
+    test("Question number not incremented if reached last", () => {
+        const initialState: QuizState = { score: 3, currentQueNo: 9 };
+        const action: Action = { type: "NEXT" }
         const state = reducer(initialState, action)
-        expect(state).toEqual({ score: 0, currentQueNo: 2 })
+        expect(state).toEqual({ score: 3, currentQueNo: 9 })
     })
+
 
     test("Reset of score and question no.", () => {
         const initialState: QuizState = { score: 7, currentQueNo: 2 };
