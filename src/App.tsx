@@ -1,5 +1,5 @@
 import './App.css';
-import { Quizpage, Homepage, Scoreboard, Report } from './pages/index'
+import { Quizpage, Homepage, Scoreboard, Report, Login, SignUp } from './pages/index'
 import { Routes, Route } from 'react-router-dom'
 function App() {
   return (
@@ -9,6 +9,8 @@ function App() {
         <Route path='/quiz' element={<Quizpage />} />
         <Route path='/report' element={<Report />} />
         <Route path='/scoreboard' element={<Scoreboard />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<SignUp />} />
       </Routes>
     </div>
   );

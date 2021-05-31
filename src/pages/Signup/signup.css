@@ -1,0 +1,28 @@
+.signup-click-btn {
+  width: max-content;
+  padding: 10px 5.8rem;
+  font-size: 18px;
+  margin: 10px;
+  background-color: orangered;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.signup-disabled-btn {
+  width: max-content;
+  padding: 10px 5.8rem;
+  font-size: 18px;
+  margin: 10px;
+  background-color: rgb(228, 115, 74);
+  color: rgb(151, 151, 151);
+  border: none;
+  outline: none;
+  cursor: not-allowed;
+}
+.error-desc{
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    word-wrap: break-word;
+}

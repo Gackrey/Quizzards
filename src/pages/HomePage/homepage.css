@@ -44,6 +44,19 @@
 .logo {
   width: 10rem;
 }
+.btn-login {
+  position: fixed;
+  right: 5rem;
+  top: 2rem;
+  padding: 7px 19px;
+  font-size: 21px;
+  color: white;
+  font-weight: bold;
+  background-color: #007bff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
 @media only screen and (max-width: 768px) {
   .selectbox {
     width: 7rem;
@@ -54,5 +67,9 @@
   }
   .selectbox > h3 {
     font-size: 17px;
+  }
+  .btn-login {
+    top: 3rem;
+    right: 33%;
   }
 }
