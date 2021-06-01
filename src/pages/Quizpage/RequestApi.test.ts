@@ -7,6 +7,7 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 describe("Testing quiz api", () => {
 
   test("Site not working", async () => {
+    mockedAxios.get.mockRejectedValue({ response: { data: { errorMessage: "Site not working" } } });
     const data = await RequestApi("");
     expect(data).toEqual({ errorMessage: "Site not working" });
   });
@@ -46,10 +47,10 @@ describe("Testing quiz api", () => {
     });
   });
   test("should return errorMessage when API is call fails", async () => {
-    mockedAxios.get.mockRejectedValue({ response: { data: { errorMessage: "user not found"}}});
+    mockedAxios.get.mockRejectedValue({ response: { data: { errorMessage: "user not found" } } });
 
     mockedAxios.isAxiosError.mockImplementation((payload) => true)
-        const user = await RequestApi('sfsfs');
-        expect(user).toEqual({ errorMessage: "user not found" });
+    const user = await RequestApi('sfsfs');
+    expect(user).toEqual({ errorMessage: "user not found" });
   })
 });
