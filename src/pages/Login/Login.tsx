@@ -2,34 +2,36 @@ import { useState } from 'react';
 import './login.css'
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../Context/AuthProvider'
 export const Login = () => {
+    const { loginUserWithCredentials } = useAuth()
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showpasswordState, setPassState] = useState(false)
     const [errorState, setErrorState] = useState(false);
-    // async function loginHandler(e, email, password) {
-    //     e.preventDefault()
-    //     const response = await loginUserWithCredentials(email, password)
-    //     if (response.success)
-    //         navigate("/")
-    //     else {
-    //         setEmail('');
-    //         setPassword('')
-    //         setErrorState(true);
-    //     }
-    // }
+    async function loginHandler(e: any, username: string, password: string) {
+        e.preventDefault()
+        const response = await loginUserWithCredentials(username, password)
+        if (response.success)
+            navigate("/")
+        else {
+            setUsername('');
+            setPassword('')
+            setErrorState(true);
+        }
+    }
     return (
         <div className="Login-container">
             <form className="Login-box"
-            // onSubmit={(e) => loginHandler(e, email, password)}
+                onSubmit={(e) => loginHandler(e, username, password)}
             >
                 <div className="heading-div">
                     <h1 className="white">Log </h1>
                     <h1 className="color">IN</h1>
                 </div>
                 <div className="input-box-text">
-                    <input type="email" required value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                    <input type="text" required value={username} placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div className="input-box-password">
                     <input type={showpasswordState ? "text" : "password"} placeholder="Password" required

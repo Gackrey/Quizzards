@@ -64,9 +64,9 @@
     text-decoration: none;
 }
 .error {
-  color: "red";
-  font-weight: "bold";
-  padding: "5px 0";
+  color: red;
+  font-weight: bold;
+  padding: 5px 0;
 }
 @media only screen and (max-width: 768px) {
   .input-box-text > input{

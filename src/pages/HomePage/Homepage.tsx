@@ -5,14 +5,25 @@ import ReactLogo from './img/react-logo.png'
 import ScoreLogo from './img/score-logo.png'
 import { useNavigate } from 'react-router-dom'
 import { Link } from "react-router-dom";
+import { useAuth } from '../../Context/AuthProvider'
 export function Homepage() {
+    const { isUserLogin } = useAuth()
     const navigate = useNavigate()
     return (
         <div className='home'>
             <h1 className='heading'>Quizzards of Oz</h1>
-            <Link to="/login">
-                <button className="btn-login">Login</button>
-            </Link>
+            {
+                isUserLogin ?
+                    <Link to="/user">
+                        <div className="avatar-circleIcon">
+                            <span><i className="fas fa-user"></i></span>
+                        </div>
+                    </Link>
+                    : <Link to="/login">
+                        <button className="btn-login">Login</button>
+                    </Link>
+            }
+
             <div className="choosebox">
                 <div className='selectbox' onClick={() => navigate('/quiz?page=ipl')}>
                     <img src={IplLogo} className='logo' alt='ipl' />

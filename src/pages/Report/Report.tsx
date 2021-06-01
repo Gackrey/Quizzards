@@ -2,8 +2,9 @@ import './report.css'
 import ScoreLogo from '../Homepage/img/score-logo.png'
 import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router'
+import axios from 'axios'
 type localdata = {
-    name: string | null,
+    username: string | null,
     score: number | null
     genre: string | null
 }
@@ -12,20 +13,12 @@ export function Report() {
     const score = new URLSearchParams(useLocation().search).get("score")
     const genre = new URLSearchParams(useLocation().search).get("genre")
     let scorenum = 0
-    if(typeof score === 'string'){
-        scorenum = parseInt(score,10)
+    if (typeof score === 'string') {
+        scorenum = parseInt(score, 10)
     }
-    const obtainedData: localdata = { name: name, score: scorenum, genre: genre }
-    const localdatastr = localStorage?.getItem('quizzerds')
-    function goHome() {
-        if (typeof localdatastr === 'string') {
-            const localdata = JSON.parse(localdatastr)
-            localdata.push(obtainedData)
-            localStorage.setItem('quizzerds', JSON.stringify(localdata))
-        }
-        else {
-            localStorage.setItem('quizzerds', JSON.stringify([obtainedData]))
-        }
+    const obtainedData: localdata = { username: name, score: scorenum, genre: genre }
+    async function goHome() {
+        await axios.post("https://quizzerd-backend.herokuapp.com/score/AddScore", obtainedData)
         navigate('/')
     }
     const navigate = useNavigate()

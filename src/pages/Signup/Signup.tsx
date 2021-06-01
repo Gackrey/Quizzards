@@ -3,7 +3,9 @@ import "../Login/login.css"
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { useAuth } from '../../Context/AuthProvider'
 export const SignUp = () => {
+    const { signinUser } = useAuth()
     const navigate = useNavigate();
     const [showpasswordState, setPassState] = useState(false);
     const [showConPasswordState, setConPassState] = useState(false);
@@ -14,17 +16,16 @@ export const SignUp = () => {
     const [passErrorState, setPassErrorState] = useState(false);
     const [conPassErrorState, setConPassErrorState] = useState(false);
     const passregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,15}$/;
-    //   async function SignupHandler(e, firstname, lastname, email, password) {
-    //     e.preventDefault();
-    //     const response = await signinUser(firstname, lastname, email, password);
-    //     if (response.success) navigate("/");
-    //     else {
-    //       setFirstname("");
-    //       setLastname("");
-    //       setEmail("");
-    //       setPassword("");
-    //     }
-    //   }
+    async function SignupHandler(e: any, username: string, email: string, password: string) {
+        e.preventDefault();
+        const response = await signinUser(username, email, password);
+        if (response.success) navigate("/");
+        else {
+            setUsername("");
+            setEmail("");
+            setPassword("");
+        }
+    }
     useEffect(() => {
         if (confirmpassword === password) setConPassErrorState(false);
         else setConPassErrorState(true);
@@ -33,7 +34,7 @@ export const SignUp = () => {
         <div className="Login-container">
             <form
                 className="Login-box"
-            // onSubmit={(e) => SignupHandler(e, firstname, lastname, email, password)}
+                onSubmit={(e) => SignupHandler(e, username, email, password)}
             >
                 <div className="heading-div">
                     <h1 className="white">Sign </h1>
@@ -43,7 +44,7 @@ export const SignUp = () => {
                     <input
                         type="text"
                         required
-                        placeholder="First Name"
+                        placeholder="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />

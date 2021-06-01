@@ -57,6 +57,23 @@
   border-radius: 10px;
   cursor: pointer;
 }
+.avatar-circleIcon{
+  position: fixed;
+  right: 5rem;
+  top: 2rem;
+  margin-left: 10px;
+  cursor: pointer;
+  padding: 11px 14px;
+  border: 1px solid #007bff;
+  background-color: white;
+  border-radius: 50%;
+  width: fit-content;
+  height: fit-content;
+}
+.avatar-circleIcon > span{
+  font-size: 24px;
+  color: black;
+}
 @media only screen and (max-width: 768px) {
   .selectbox {
     width: 7rem;

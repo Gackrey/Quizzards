@@ -5,11 +5,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QuizProvider } from './Context/QuizContext'
+import { AuthProvider } from './Context/AuthProvider'
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <QuizProvider>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </QuizProvider>
     </Router>
   </React.StrictMode>,

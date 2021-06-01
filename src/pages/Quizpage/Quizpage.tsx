@@ -7,6 +7,7 @@ import { RequestApi } from './RequestApi'
 import { quizQuestions, ServerData, ServerError } from './quiz.types'
 import { useQuiz } from '../../Context/QuizContext'
 import { rules } from './Rules'
+import axios from 'axios';
 export function Quizpage() {
   const { currentQueNo, score, dispatch } = useQuiz()
   const query = new URLSearchParams(useLocation().search).get("page")
@@ -19,6 +20,18 @@ export function Quizpage() {
   const [timerstart, setTimerStart] = useState(false)
   const classname = `${query}quiz`;
   const navigate = `/report?name=${name}&score=${score}&genre=${query}`
+  useEffect(() => {
+    const userData = localStorage?.getItem("QuizAuth")
+    if (userData) {
+      const loginStatus = JSON.parse(userData);
+      (async function () {
+        await axios.get("https://quizzerd-backend.herokuapp.com/user/userDetails",
+          { headers: { authorization: loginStatus.userID } }
+        )
+          .then((response) => setName(response.data.user.username))
+      })()
+    }
+  }, [])
   useEffect(() => {
     (async function () {
       const tempData = await RequestApi(query);

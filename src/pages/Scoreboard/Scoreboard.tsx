@@ -1,33 +1,33 @@
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './scoreboard.css'
 import { sortScorers } from './scoreboard.utils'
-export type localdata = {
-    name: string,
-    score: number,
-    genre: string
-}
+import axios from 'axios'
+import { Score } from './scoreboard.types'
 export function Scoreboard() {
-    const localdatastr = localStorage?.getItem('quizzerds')
-    let localData: localdata[] = [{ name: "", score: 0, genre: '' }]
-    if (typeof localdatastr === 'string') {
-        localData = JSON.parse(localdatastr)
-        localData = sortScorers(localData)
-    }
+    const [scores, SetScores] = useState([] as Score[])
+    useEffect(() => {
+        (async function () {
+            await axios.get("https://quizzerd-backend.herokuapp.com/score/ShowAllScore"
+            )
+                .then((response) => SetScores(sortScorers(response.data)))
+        })()
+    }, [])
     const navigate = useNavigate()
     return (
         <div className='scoreboard'>
             <h1 className='heading'>Leaderboard</h1>
             {
-                localdatastr ?
+                scores.length > 0 ?
                     <table>
                         <tr>
                             <th>Name</th>
                             <th>Score</th>
                             <th>Genre</th>
                         </tr>
-                        {localData.map(person =>
+                        {scores.map(person =>
                             <tr>
-                                <td>{person.name}</td>
+                                <td>{person.username}</td>
                                 <td>{person.score}</td>
                                 <td>{person.genre}</td>
                             </tr>)
