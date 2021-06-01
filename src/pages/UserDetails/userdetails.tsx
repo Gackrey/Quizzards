@@ -1,14 +1,21 @@
 import './userdetails.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router';
 import { User, Score } from './userdetails.types'
 import { useAuth } from '../../Context/AuthProvider'
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 export const Userdetails = () => {
     const [user, SetUser] = useState({} as User)
-    const [score, SetScore] = useState([] as Score[])
+    const [scores, SetScores] = useState([] as Score[])
+    const [expert, setExpert] = useState({ score: 0, genre: "nan" } as Score)
     const { LogOut } = useAuth()
+    const navigate = useNavigate();
+    function logoutHandler() {
+        LogOut()
+        navigate('/')
+    }
     useEffect(() => {
         const userData = localStorage?.getItem("QuizAuth")
         if (userData) {
@@ -24,10 +31,15 @@ export const Userdetails = () => {
                 await axios.get("https://quizzerd-backend.herokuapp.com/score/UserScores",
                     { headers: { authorization: loginStatus.userID } }
                 )
-                    .then((response) => SetScore(response.data))
+                    .then((response) => SetScores(response.data))
             })()
         }
     }, [])
+    scores.map(curscore => {
+        if (curscore.score > expert.score)
+            setExpert({ score: curscore.score, genre: curscore.genre })
+        return 0;
+    })
 
     return (
         <div className="user">
@@ -35,9 +47,10 @@ export const Userdetails = () => {
                 user.username ? <div className="user-details">
                     <h2>Username: {user.username}</h2>
                     <h2>Email: {user.email}</h2>
-                    <h2>Quizzes Attempted: {score.length}</h2>
-                    <h2>Highest Score: </h2>
-                    <button className="btn-logout" onClick={LogOut}>Log Out</button>
+                    <h2>Quizzes Attempted: {scores.length}</h2>
+                    <h2>Highest Score: {expert.score}</h2>
+                    <h2>Expert in: {expert.genre.toUpperCase()} quiz</h2>
+                    <button className="btn-logout" onClick={logoutHandler}>Log Out</button>
                 </div>
                     : <Loader type="Puff"
                         color="#00BFFF"

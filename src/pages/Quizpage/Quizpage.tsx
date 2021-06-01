@@ -15,7 +15,7 @@ export function Quizpage() {
   const [serverFailure, setServerFailure] = useState<ServerError | null>(null)
   const [question, setQuestion] = useState<quizQuestions | null>(null)
   const [optionClick, setClickState] = useState(false)
-  const [name, setName] = useState('')
+  const [name, setName] = useState('Guest')
   const [startQuiz, setStartQuiz] = useState(false)
   const [timerstart, setTimerStart] = useState(false)
   const classname = `${query}quiz`;
