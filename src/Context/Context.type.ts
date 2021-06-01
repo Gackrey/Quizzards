@@ -1,12 +1,8 @@
 import { Action_QUIZ } from '../pages/Quizpage/quiz.types'
 export type AuthenticationContextType = {
     isUserLogin: boolean,
-    loginUserWithCredentials: (email: string, password: string) => Promise<{
-        success: any;
-    } >,
-    signinUser: (username: string, email: string, password: string) => Promise<{
-        success: any;
-    } >,
+    loginUserWithCredentials: (email: string, password: string) => any
+    signinUser: (username: string, email: string, password: string) => any
     LogOut: () => void,
 }
 

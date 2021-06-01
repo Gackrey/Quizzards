@@ -1,10 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { AuthApiLogin, AuthApiSignUp } from './AuthHandler';
 import { AuthenticationContextType } from './Context.type'
-// export const AuthContext = createContext({} as AuthenticationContextType);
-export const AuthContext = createContext();
-// export const AuthProvider: React.FC = ({ children }) => {
-export const AuthProvider = ({ children }) => {
+export const AuthContext = createContext({} as AuthenticationContextType);
+export const AuthProvider: React.FC = ({ children }) => {
   const [isUserLogin, setLogin] = useState(false);
   useEffect(() => {
     const localUser = localStorage?.getItem("QuizAuth")
@@ -14,8 +12,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // async function loginUserWithCredentials(email: string, password: string) {
-  async function loginUserWithCredentials(email, password) {
+  async function loginUserWithCredentials(email: string, password: string) {
     try {
       const response = await AuthApiLogin(email, password);
       if (response.data.success) {
@@ -33,8 +30,7 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  // async function signinUser(username: string, email: string, password: string) {
-  async function signinUser(username, email, password) {
+  async function signinUser(username: string, email: string, password: string) {
     try {
       const response = await AuthApiSignUp(username, email, password);
       if (response.data.success) {
