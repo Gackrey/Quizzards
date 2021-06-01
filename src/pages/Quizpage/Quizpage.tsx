@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { RequestApi } from './RequestApi'
 import { quizQuestions, ServerData, ServerError } from './quiz.types'
 import { useQuiz } from '../../Context/QuizContext'
-
+import { rules } from './Rules'
 export function Quizpage() {
   const { currentQueNo, score, dispatch } = useQuiz()
   const query = new URLSearchParams(useLocation().search).get("page")
@@ -15,8 +15,7 @@ export function Quizpage() {
   const [question, setQuestion] = useState<quizQuestions | null>(null)
   const [optionClick, setClickState] = useState(false)
   const [name, setName] = useState('')
-  const [nameSet, setNameState] = useState(false)
-  const [errorstate, setErrorstate] = useState(false)
+  const [startQuiz, setStartQuiz] = useState(false)
   const [timerstart, setTimerStart] = useState(false)
   const classname = `${query}quiz`;
   const navigate = `/report?name=${name}&score=${score}&genre=${query}`
@@ -39,36 +38,21 @@ export function Quizpage() {
     })();
   }, [serverData, currentQueNo, serverFailure]);
   function startChecker() {
-    if (name !== '' && /^[a-zA-Z\s]*$/.test(name)) {
-      setNameState(true)
-      setTimerStart(true)
-      dispatch({ type: "RESET" })
-    }
-    else {
-      setName('')
-      setErrorstate(true)
-    }
+    setStartQuiz(true)
+    setTimerStart(true)
+    dispatch({ type: "RESET" })
   }
   return (question !== null ?
     <div className={classname}>
-      <div className='namefield' style={{ display: nameSet ? 'none' : "block" }}>
-        <div className="inputbox">
-          <input
-            className="input-field"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required={true}
-          />
-          <span className="input-heading">Enter Name</span>
-        </div>
-        <p
-          style={{ display: errorstate ? 'block' : "none" }}
-          className='error-text'
-        >Name can't be blank or a number!!!! Enter a valid name.....</p>
-        <div className="btn-next" onClick={startChecker}>Start Quiz</div>
+      <div className='rulebox' style={{ display: startQuiz ? 'none' : "block" }}>
+        <ul>
+          {
+            rules.map(rule => <li className="li-style" key={rule}>{rule}</li>)
+          }
+        </ul>
+        <div className="btn-start" onClick={startChecker}>Start Quiz!</div>
       </div>
-      <div style={{ display: nameSet ? 'block' : "none" }}>
+      <div style={{ display: startQuiz ? 'block' : "none" }}>
         <Header name={name} score={score} />
         <Timer
           optionClick={optionClick}

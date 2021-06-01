@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios'
 export async function RequestApi(genre: string | null): Promise<ServerData | ServerError> {
     try {
         const response = await axios.get<ServerData>(
-            `https://quizzerd-backend.herokuapp.com/${genre}`
+            `https://quizzerd-backend.herokuapp.com/quiz/${genre}`
         );
         return response.data;
     }

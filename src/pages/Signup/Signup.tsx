@@ -7,8 +7,7 @@ export const SignUp = () => {
     const navigate = useNavigate();
     const [showpasswordState, setPassState] = useState(false);
     const [showConPasswordState, setConPassState] = useState(false);
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmpassword, setConfirmPassword] = useState("");
@@ -45,17 +44,8 @@ export const SignUp = () => {
                         type="text"
                         required
                         placeholder="First Name"
-                        value={firstname}
-                        onChange={(e) => setFirstname(e.target.value)}
-                    />
-                </div>
-                <div className="input-box-text">
-                    <input
-                        type="text"
-                        required
-                        placeholder="Last Name"
-                        value={lastname}
-                        onChange={(e) => setLastname(e.target.value)}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
                 <div className="input-box-text">
@@ -64,11 +54,7 @@ export const SignUp = () => {
                         required
                         placeholder="Email"
                         value={email}
-                        onChange={(e) => {
-                            setEmail(e.target.value)
-
-                        }
-                        }
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
                 <div className="input-box-password">
