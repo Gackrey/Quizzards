@@ -29,7 +29,7 @@ export function Scoreboard() {
                 await axios.get("https://quizzerd-backend.herokuapp.com/score/UserScores",
                     { headers: { authorization: loginStatus.userID } }
                 )
-                    .then((response) => SetUserScores(response.data))
+                    .then((response) => SetUserScores(sortScorers(response.data)))
             })()
         }
     }, [])
@@ -38,7 +38,7 @@ export function Scoreboard() {
         <div className='scoreboard'>
             {isReceived ?
                 <div>
-                    <h1 className='heading'>Leaderboard</h1>
+                    <h1 className='heading-score'>Leaderboard</h1>
                     <div className="tab-body">
                         <button className="tab" onClick={() => setChoice(1)}>Top Scores</button>
                         <button className="tab" onClick={() => setChoice(2)}>Your Scores</button>

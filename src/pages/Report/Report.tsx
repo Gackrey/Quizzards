@@ -27,7 +27,7 @@ export function Report() {
     const navigate = useNavigate()
     return (
         <div className='report'>
-            <h1 className='heading'>Quizzards of Oz.</h1>
+            <h1 className='heading-report'>Quizzards of Oz.</h1>
             <div className="reportbody">
                 <img src={ScoreLogo} className='logo' alt='score' />
                 <h1>{name}, you scored {score}</h1>

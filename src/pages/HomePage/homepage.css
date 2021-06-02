@@ -3,7 +3,7 @@
   background: url("./img/background.jpg");
   height: 100vh;
 }
-.heading {
+.heading-home {
   font-size: 4rem;
   color: whitesmoke;
   font-family: "Reggae One", cursive;
@@ -92,5 +92,10 @@
   .avatar-circleIcon {
     right: 2rem;
     top: 0px;
+  }
+  .heading-home {
+    text-align: start;
+    font-size: 28px;
+    margin-left: 1rem;
   }
 }

@@ -3,7 +3,7 @@
   height: 100vh;
   color: white;
 }
-.heading {
+.heading-score {
   color: white;
   font-size: 3rem;
   font-family: "Reggae One", cursive;
@@ -51,6 +51,9 @@ th {
   padding: 5px 10px;
 }
 @media only screen and (max-width: 768px) {
+  .heading-score {
+    font-size: 2rem;
+  }
   .tab-body {
     width: 64%;
   }

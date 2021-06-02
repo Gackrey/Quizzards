@@ -3,7 +3,7 @@
   height: 100vh;
   color: white;
 }
-.heading {
+.heading-report {
   font-size: 4rem;
   font-family: "Reggae One", cursive;
 }
@@ -25,10 +25,8 @@
   border-radius: 15px;
 }
 @media only screen and (max-width: 768px) {
-  .heading {
-    text-align: start;
-    font-size: 28px;
-    margin-left: 1rem;
+  .heading-report {
+    font-size: 2rem;
   }
   .reportbody {
     display: block;

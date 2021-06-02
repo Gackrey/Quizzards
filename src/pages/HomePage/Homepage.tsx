@@ -11,7 +11,7 @@ export function Homepage() {
     const navigate = useNavigate()
     return (
         <div className='home'>
-            <h1 className='heading'>Quizzards of Oz</h1>
+            <h1 className='heading-home'>Quizzards of Oz</h1>
             {
                 isUserLogin ?
                     <Link to="/user">
