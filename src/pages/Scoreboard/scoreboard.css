@@ -11,6 +11,11 @@
 table {
   width: 46%;
   margin: auto;
+  border-collapse: collapse;
+}
+th {
+  background-color: black;
+  color: #007bff;
 }
 td,
 th {
@@ -29,4 +34,27 @@ th {
   outline: none;
   border: none;
   border-radius: 15px;
+}
+.tab-body {
+  width: 46%;
+  margin: auto;
+  margin-top: 2rem;
+  text-align: start;
+}
+.tab {
+  background-color: white;
+  color: #007bff;
+  font-size: 18px;
+  border: none;
+  border-right: 3px solid black;
+  border-bottom: none;
+  padding: 5px 10px;
+}
+@media only screen and (max-width: 768px) {
+  .tab-body {
+    width: 64%;
+  }
+  .tab {
+    padding: 5px 8px;
+  }
 }

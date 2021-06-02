@@ -60,7 +60,7 @@
 .avatar-circleIcon{
   position: fixed;
   right: 5rem;
-  top: 2rem;
+  top: 1.5rem;
   margin-left: 10px;
   cursor: pointer;
   padding: 11px 14px;
@@ -86,7 +86,11 @@
     font-size: 17px;
   }
   .btn-login {
-    top: 3rem;
-    right: 33%;
+    top: 5px;
+    right: 6px;
+  }
+  .avatar-circleIcon {
+    right: 2rem;
+    top: 0px;
   }
 }

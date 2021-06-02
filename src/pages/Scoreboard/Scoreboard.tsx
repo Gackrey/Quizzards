@@ -7,17 +7,31 @@ import { Score } from './scoreboard.types'
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 export function Scoreboard() {
-    const [scores, SetScores] = useState([] as Score[])
+    const [topscores, SetTopScores] = useState([] as Score[])
+    const [userscores, SetUserScores] = useState([] as Score[])
     const [isReceived, setReceived] = useState(false)
+    const [chooseTab, setChoice] = useState(1)
     useEffect(() => {
         (async function () {
             await axios.get("https://quizzerd-backend.herokuapp.com/score/ShowAllScore"
             )
                 .then((response) => {
-                    SetScores(sortScorers(response.data))
+                    SetTopScores(sortScorers(response.data))
                     setReceived(true)
                 })
         })()
+    }, [])
+    useEffect(() => {
+        const userData = localStorage?.getItem("QuizAuth")
+        if (userData) {
+            const loginStatus = JSON.parse(userData);
+            (async function () {
+                await axios.get("https://quizzerd-backend.herokuapp.com/score/UserScores",
+                    { headers: { authorization: loginStatus.userID } }
+                )
+                    .then((response) => SetUserScores(response.data))
+            })()
+        }
     }, [])
     const navigate = useNavigate()
     return (
@@ -25,24 +39,50 @@ export function Scoreboard() {
             {isReceived ?
                 <div>
                     <h1 className='heading'>Leaderboard</h1>
-                    {
-                        scores.length > 0 ?
-                            <table>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Score</th>
-                                    <th>Genre</th>
-                                </tr>
-                                {scores.map(person =>
+                    <div className="tab-body">
+                        <button className="tab" onClick={() => setChoice(1)}>Top Scores</button>
+                        <button className="tab" onClick={() => setChoice(2)}>Your Scores</button>
+                    </div>
+                    <div style={{ display: chooseTab === 1 ? "block" : "none" }}>
+                        {
+                            topscores.length > 0 ?
+                                <table>
                                     <tr>
-                                        <td>{person.username}</td>
-                                        <td>{person.score}</td>
-                                        <td>{person.genre}</td>
-                                    </tr>)
-                                }
-                            </table>
-                            : <h1>No records found</h1>
-                    }
+                                        <th>Name</th>
+                                        <th>Score</th>
+                                        <th>Genre</th>
+                                    </tr>
+                                    {topscores.map(person =>
+                                        <tr>
+                                            <td>{person.username}</td>
+                                            <td>{person.score}</td>
+                                            <td>{person.genre}</td>
+                                        </tr>)
+                                    }
+                                </table>
+                                : <h1>No records found</h1>
+                        }
+                    </div>
+                    <div style={{ display: chooseTab === 2 ? "block" : "none" }}>
+                        {
+                            userscores.length > 0 ?
+                                <table>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Score</th>
+                                        <th>Genre</th>
+                                    </tr>
+                                    {userscores.map(person =>
+                                        <tr>
+                                            <td>{person.username}</td>
+                                            <td>{person.score}</td>
+                                            <td>{person.genre}</td>
+                                        </tr>)
+                                    }
+                                </table>
+                                : <h1>No records found</h1>
+                        }
+                    </div>
                     <button className='btn-back' onClick={() => navigate('/')}>Back</button>
                 </div>
                 : <Loader type="Puff"
