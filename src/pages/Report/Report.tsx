@@ -1,5 +1,5 @@
 import './report.css'
-import ScoreLogo from '../Homepage/img/score-logo.png'
+import ScoreLogo from '../HomePage/img/score-logo.png'
 import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router'
 import { useAuth } from '../../Context/AuthProvider'

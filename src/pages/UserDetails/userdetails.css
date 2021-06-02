@@ -1,5 +1,5 @@
 .user {
-  background: url("../Homepage/img/background.jpg");
+  background: url("../HomePage/img/background.jpg");
   display: grid;
   place-items: center;
   height: 100vh;
