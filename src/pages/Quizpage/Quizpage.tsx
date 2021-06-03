@@ -8,6 +8,8 @@ import { quizQuestions, ServerData, ServerError } from './quiz.types'
 import { useQuiz } from '../../Context/QuizContext'
 import { rules } from './Rules'
 import axios from 'axios';
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 export function Quizpage() {
   const { currentQueNo, score, dispatch } = useQuiz()
   const query = new URLSearchParams(useLocation().search).get("page")
@@ -104,6 +106,10 @@ export function Quizpage() {
     </div>
     : serverFailure !== null ?
       <div><h1 className="errorpage">{ }</h1></div>
-      : <div className={classname}><h1>Loading....</h1></div>
+      : <div className={classname}><Loader type="Puff"
+        color="#00BFFF"
+        height={100}
+        width={100}
+      /></div>
   );
 }
