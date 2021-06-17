@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './scoreboard.css'
-import { sortScorers } from './scoreboard.utils'
+import { sortAndManageScores } from './scoreboard.utils'
 import axios from 'axios'
 import { Score } from './scoreboard.types'
 import Loader from "react-loader-spinner";
@@ -16,7 +16,7 @@ export function Scoreboard() {
             await axios.get("https://quizzerd-backend.herokuapp.com/score/ShowAllScore"
             )
                 .then((response) => {
-                    SetTopScores(sortScorers(response.data))
+                    SetTopScores(sortAndManageScores(response.data))
                     setReceived(true)
                 })
         })()
@@ -29,7 +29,7 @@ export function Scoreboard() {
                 await axios.get("https://quizzerd-backend.herokuapp.com/score/UserScores",
                     { headers: { authorization: loginStatus.userID } }
                 )
-                    .then((response) => SetUserScores(sortScorers(response.data)))
+                    .then((response) => SetUserScores(sortAndManageScores(response.data)))
             })()
         }
     }, [])
@@ -85,7 +85,7 @@ export function Scoreboard() {
                     </div>
                     <button className='btn-back' onClick={() => navigate('/')}>Back</button>
                 </div>
-                : <Loader type="Puff"
+                : <Loader type="Puff" 
                     color="#00BFFF"
                     height={100}
                     width={100}

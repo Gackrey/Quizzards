@@ -1,4 +1,4 @@
-import { sortScorers } from './scoreboard.utils'
+import { sortAndManageScores } from './scoreboard.utils'
 const testArray = [
     { username: "Gourav", score: 7, genre: 'ipl' },
     { username: "Sourav", score: 1, genre: 'react' },
@@ -10,6 +10,6 @@ const resultArray = [
     { username: "Sourav", score: 1, genre: 'react' }
 ];
 test("Should sort user data with respect to score", () => {
-    const result = sortScorers(testArray);
+    const result = sortAndManageScores(testArray);
     expect(result).toEqual(resultArray);
 });

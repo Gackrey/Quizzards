@@ -56,6 +56,7 @@ th {
   }
   .tab-body {
     width: 64%;
+    margin-top: 1rem;
   }
   .tab {
     padding: 5px 8px;
