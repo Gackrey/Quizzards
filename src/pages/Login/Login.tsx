@@ -10,6 +10,10 @@ export const Login = () => {
     const [password, setPassword] = useState('');
     const [showpasswordState, setPassState] = useState(false)
     const [errorState, setErrorState] = useState(false);
+    function autoLogin() {
+        setUsername("Test123");
+        setPassword("Qwerty123");
+    }
     async function loginHandler(e: any, username: string, password: string) {
         e.preventDefault()
         const response = await loginUserWithCredentials(username, password)
@@ -43,8 +47,10 @@ export const Login = () => {
                     </div>
                 </div>
                 <button type="submit" className="login-click-btn">Log In</button>
+                <br />
+                <button type="button" className="login-click-btn" onClick={autoLogin}>Test user</button>
                 <p className="small-desc">Dont have a account?
-                <Link to="/signup" className="moveto-signup">
+                    <Link to="/signup" className="moveto-signup">
                         Sign Up</Link>
                 </p>
                 {errorState ? "" : <br />}
