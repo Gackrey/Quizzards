@@ -6,6 +6,8 @@ import axios from 'axios'
 import { Score } from './scoreboard.types'
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { API_URL } from '../../Constants'
+
 export function Scoreboard() {
     const [topscores, SetTopScores] = useState([] as Score[])
     const [userscores, SetUserScores] = useState([] as Score[])
@@ -13,7 +15,7 @@ export function Scoreboard() {
     const [chooseTab, setChoice] = useState(1)
     useEffect(() => {
         (async function () {
-            await axios.get("https://quizzerd-backend.herokuapp.com/score/ShowAllScore"
+            await axios.get(`${API_URL}/score/ShowAllScore`
             )
                 .then((response) => {
                     SetTopScores(sortAndManageScores(response.data))
@@ -26,7 +28,7 @@ export function Scoreboard() {
         if (userData) {
             const loginStatus = JSON.parse(userData);
             (async function () {
-                await axios.get("https://quizzerd-backend.herokuapp.com/score/UserScores",
+                await axios.get(`${API_URL}/score/UserScores`,
                     { headers: { authorization: loginStatus.userID } }
                 )
                     .then((response) => SetUserScores(sortAndManageScores(response.data)))

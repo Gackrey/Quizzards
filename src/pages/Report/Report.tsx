@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router'
 import { useAuth } from '../../Context/AuthProvider'
 import axios from 'axios'
+import { API_URL } from '../../Constants'
+
 type localdata = {
     username: string | null,
     score: number | null
@@ -21,7 +23,7 @@ export function Report() {
     const obtainedData: localdata = { username: name, score: scorenum, genre: genre }
     async function goHome() {
         if (isUserLogin)
-            await axios.post("https://quizzerd-backend.herokuapp.com/score/AddScore", obtainedData)
+            await axios.post(`${API_URL}/score/AddScore`, obtainedData)
         navigate('/')
     }
     const navigate = useNavigate()

@@ -1,9 +1,11 @@
 import { ServerData, ServerError } from './quiz.types'
 import axios, { AxiosError } from 'axios'
+import { API_URL } from '../../Constants';
+
 export async function RequestApi(genre: string | null): Promise<ServerData | ServerError> {
     try {
         const response = await axios.get<ServerData>(
-            `https://quizzerd-backend.herokuapp.com/quiz/${genre}`
+            `${API_URL}/quiz/${genre}`
         );
         return response.data;
     }

@@ -10,6 +10,8 @@ import { rules } from './Rules'
 import axios from 'axios';
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { API_URL } from '../../Constants';
+
 export function Quizpage() {
   const { currentQueNo, score, dispatch } = useQuiz()
   const query = new URLSearchParams(useLocation().search).get("page")
@@ -27,7 +29,7 @@ export function Quizpage() {
     if (userData) {
       const loginStatus = JSON.parse(userData);
       (async function () {
-        await axios.get("https://quizzerd-backend.herokuapp.com/user/userDetails",
+        await axios.get(`${API_URL}/user/userDetails`,
           { headers: { authorization: loginStatus.userID } }
         )
           .then((response) => setName(response.data.user.username))

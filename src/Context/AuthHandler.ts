@@ -1,8 +1,9 @@
 import axios from "axios";
+import { API_URL } from "../Constants";
 
 export const AuthApiLogin = async (username: string, password: string) => {
   const response = await axios.post(
-    "https://quizzerd-backend.herokuapp.com/user/login",
+    `${API_URL}/user/login`,
     {
       username,
       password,
@@ -13,7 +14,7 @@ export const AuthApiLogin = async (username: string, password: string) => {
 
 export const AuthApiSignUp = async (username: string, email: string, password: string) => {
   const response = await axios.post(
-    "https://quizzerd-backend.herokuapp.com/user/signup",
+    `${API_URL}/user/signup`,
     {
       username,
       email,

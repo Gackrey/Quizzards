@@ -6,6 +6,8 @@ import { User, Score } from './userdetails.types'
 import { useAuth } from '../../Context/AuthProvider'
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { API_URL } from '../../Constants';
+
 export const Userdetails = () => {
     const [user, SetUser] = useState({} as User)
     const [scores, SetScores] = useState([] as Score[])
@@ -21,14 +23,14 @@ export const Userdetails = () => {
         if (userData) {
             const loginStatus = JSON.parse(userData);
             (async function () {
-                await axios.get("https://quizzerd-backend.herokuapp.com/user/userDetails",
+                await axios.get(`${API_URL}/user/userDetails`,
                     { headers: { authorization: loginStatus.userID } }
                 )
                     .then((response) => SetUser(response.data.user))
             })();
 
             (async function () {
-                await axios.get("https://quizzerd-backend.herokuapp.com/score/UserScores",
+                await axios.get(`${API_URL}/score/UserScores`,
                     { headers: { authorization: loginStatus.userID } }
                 )
                     .then((response) => SetScores(response.data))
