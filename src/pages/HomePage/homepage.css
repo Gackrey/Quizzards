@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Reggae+One&display=swap");
+.home {
+  background: url("./img/background.jpg");
+  height: 100vh;
+}
+.heading-home {
+  font-size: 4rem;
+  color: whitesmoke;
+  font-family: "Reggae One", cursive;
+}
+.choosebox {
+  margin: auto;
+  margin-top: 2rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-areas:
+    "div div"
+    "div div";
+  place-items: center;
+  width: fit-content;
+  padding: 2rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1.5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.selectbox {
+  width: 11rem;
+  height: 12rem;
+  display: flex;
+  padding: 0.5rem;
+  background-color: #ff48e6;
+  border: 1px solid blue;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+.selectbox > h3 {
+  font-size: 28px;
+  font-family: "Reggae One", cursive;
+}
+.logo {
+  width: 10rem;
+}
+.btn-login {
+  position: fixed;
+  right: 5rem;
+  top: 2rem;
+  padding: 7px 19px;
+  font-size: 21px;
+  color: white;
+  font-weight: bold;
+  background-color: #007bff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.avatar-circleIcon{
+  position: fixed;
+  right: 5rem;
+  top: 1.5rem;
+  margin-left: 10px;
+  cursor: pointer;
+  padding: 11px 14px;
+  border: 1px solid #007bff;
+  background-color: white;
+  border-radius: 50%;
+  width: fit-content;
+  height: fit-content;
+}
+.avatar-circleIcon > span{
+  font-size: 24px;
+  color: black;
+}
+@media only screen and (max-width: 768px) {
+  .selectbox {
+    width: 7rem;
+    height: 8rem;
+  }
+  .logo {
+    width: 7rem;
+  }
+  .selectbox > h3 {
+    font-size: 17px;
+  }
+  .btn-login {
+    top: 5px;
+    right: 6px;
+  }
+  .avatar-circleIcon {
+    right: 2rem;
+    top: 0px;
+  }
+  .heading-home {
+    text-align: start;
+    font-size: 28px;
+    margin-left: 1rem;
+  }
+}

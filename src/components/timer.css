@@ -1,0 +1,18 @@
+.timer{
+    width: fit-content;
+    margin: auto;
+    margin-top: 1rem;
+    background-color: rgb(54 54 54 / 63%);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1.5px);
+    padding: 0.7rem;
+    border: 1px solid black;
+    border-radius: 6px;   
+}
+.bg_grad {
+  padding: 5px;
+  margin: 5px;
+  background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+  background-color: #000000;
+  border-radius: 6px;
+}

@@ -1,0 +1,148 @@
+.iplquiz,
+.marvelquiz,
+.reactquiz {
+  height: 100vh;
+}
+.iplquiz::before{
+  content: "";
+  background: url("./img/ipl-scene.jpg") center/cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+.marvelquiz::before {
+  content: "";
+  background: url("./img/marvel-scene.jpg") center/cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+.reactquiz::before {
+  content: "";
+  background: url("./img/react-scene.jpg") center/cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+.errorpage::before {
+  content: "";
+  background: url("./img/404page.png") center/cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}
+.quizbox,.rulebox {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 1rem;
+  width: fit-content;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1.5px);
+}
+.li-style{
+  text-align: start;
+  font-size: 20px;
+}
+.rulebox{
+  padding: 3rem;
+}
+.question {
+  font-size: 22px;
+}
+.box-area {
+  margin-top: 2rem;
+}
+.inputbox {
+  box-sizing: border-box;
+}
+.input-field {
+  background-color: transparent;
+  position: relative;
+  width: 35%;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  border-bottom: 2px solid black;
+}
+.input-heading {
+  position: relative;
+  transition: 0.2s;
+  top: 0;
+  left: -35%;
+  font-size: 22px;
+  pointer-events: none;
+}
+.input-field:focus,
+.input-field:focus {
+  border-bottom-color: var(--primary);
+}
+.input-field:focus + .input-heading,
+.input-field:valid + .input-heading {
+  top: -20px;
+  font-size: 16px;
+}
+.btn-option {
+  display: block;
+  text-align: center;
+  width: 30rem;
+  margin: 0.5rem auto;
+  padding: 1rem;
+  font-size: 1.2rem;
+  background-color: white;
+  border: 2px solid #007bff;
+  cursor: pointer;
+}
+.btn-next,.btn-start {
+  width: fit-content;
+  margin: auto;
+  cursor: default;
+  margin-top: 1rem;
+  padding: 0.7rem 4rem;
+  font-size: 1.4rem;
+  background: #1717b4;
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+}
+.error-text {
+  font-weight: bold;
+  color: red;
+}
+@media only screen and (max-width: 768px) {
+  .input-field {
+    width: 89%;
+  }
+  .input-heading {
+    font-size: 20px;
+    top: -30px;
+    left: -29%;
+  }
+  .input-field:focus + .input-heading,
+  .input-field:valid + .input-heading {
+    top: -50px;
+    font-size: 18px;
+  }
+  .btn-option {
+    width: 17rem;
+  }
+}

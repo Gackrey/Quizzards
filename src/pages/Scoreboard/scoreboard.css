@@ -1,0 +1,64 @@
+.scoreboard {
+  background: url("../HomePage/img/background.jpg");
+  height: 100vh;
+  color: white;
+}
+.heading-score {
+  color: white;
+  font-size: 3rem;
+  font-family: "Reggae One", cursive;
+}
+table {
+  width: 46%;
+  margin: auto;
+  border-collapse: collapse;
+}
+th {
+  background-color: black;
+  color: #007bff;
+}
+td,
+th {
+  border: 1px solid white;
+  padding: 0.5rem;
+  font-size: 20px;
+}
+.btn-back {
+  width: fit-content;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 0.7rem 4rem;
+  font-size: 1.4rem;
+  background-color: #dbf10c;
+  color: black;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+}
+.tab-body {
+  width: 46%;
+  margin: auto;
+  margin-top: 2rem;
+  text-align: start;
+}
+.tab {
+  background-color: white;
+  color: #007bff;
+  font-size: 18px;
+  border: none;
+  border-right: 3px solid black;
+  border-bottom: none;
+  padding: 5px 10px;
+}
+@media only screen and (max-width: 768px) {
+  .heading-score {
+    font-size: 2rem;
+  }
+  .tab-body {
+    width: 64%;
+    margin-top: 1rem;
+  }
+  .tab {
+    padding: 5px 8px;
+  }
+}

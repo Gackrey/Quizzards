@@ -1,0 +1,34 @@
+.report {
+  background: url("../HomePage/img/background.jpg");
+  height: 100vh;
+  color: white;
+}
+.heading-report {
+  font-size: 4rem;
+  font-family: "Reggae One", cursive;
+}
+.reportbody {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-back {
+  width: fit-content;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 0.7rem 4rem;
+  font-size: 1.4rem;
+  background-color: #dbf10c;
+  color: black;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+}
+@media only screen and (max-width: 768px) {
+  .heading-report {
+    font-size: 2rem;
+  }
+  .reportbody {
+    display: block;
+  }
+}

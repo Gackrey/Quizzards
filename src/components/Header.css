@@ -1,0 +1,19 @@
+.header {
+  font-size: 4rem;
+  color: black;
+  font-family: "Reggae One", cursive;
+}
+.body {
+  display: flex;
+  width: 35%;
+  margin: auto;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 768px) {
+  .header {
+    font-size: 2rem;
+  }
+  .body {
+    width: 90%;
+  }
+}
